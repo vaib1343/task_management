@@ -1,0 +1,38 @@
+datasource db {
+    provider = "mongodb"
+    url      = "mongodb+srv://vaib1343:12345@cluster0.ko3ll.mongodb.net/taskManagement?retryWrites=true&w=majority"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id        String @id @default(auto()) @map("_id") @db.ObjectId
+    firstName String
+    lastName  String
+    email     String @unique
+    password  String
+}
+
+model Task {
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
+    name           String
+    description    String
+    priority       Priority @default(P1)
+    label          String
+    dateCompletion DateTime
+    status         Status   @default(TODO)
+}
+
+enum Status {
+    TODO
+    PENDING
+    DONE
+}
+
+enum Priority {
+    P1
+    P2
+    P3
+}
