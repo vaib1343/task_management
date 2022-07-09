@@ -1,0 +1,11 @@
+@import '../../../styles/variable';
+
+.label{
+    padding: .6rem 1rem;
+    background-color: $primary;
+    color: white;
+    font-weight: 400;
+    font-size: 1.3rem;
+    border-radius: .5rem;
+    display: inline-block;
+}

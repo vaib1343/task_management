@@ -1,0 +1,29 @@
+.cardContainer {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 0.4rem;
+    margin: 1rem 0;
+
+    .titleContainter {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    h5 {
+        font-size: 1.5rem;
+    }
+    p {
+        font-size: 1.4rem;
+    }
+    .label{
+        margin-bottom: 1rem;
+    }
+
+    .iconContainer{
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+        display: flex;
+        justify-content: space-between;
+        width: 15rem;
+    }
+}

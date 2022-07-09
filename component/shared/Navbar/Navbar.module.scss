@@ -1,0 +1,14 @@
+@import '../../../styles/variable';
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary;
+    padding: 1rem 10rem;
+
+    .heading {
+        font-size: 3rem;
+        color: #fff;
+    }
+}
