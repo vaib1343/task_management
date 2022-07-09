@@ -6,7 +6,16 @@ import { undefineHandle } from 'utils/utils';
 
 export const getAllTask = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const tasks = await prisma.task.findMany();
+        const status = req.query.status;
+        let tasks;
+        tasks = await prisma.task.findMany();
+        if (status === 'TODO' || status === 'PENDING' || status === 'DONE') {
+            tasks = await prisma.task.findMany({
+                where: {
+                    status: status,
+                },
+            });
+        }
         success(res, tasks, 'All task fetched');
     } catch (err) {
         error(res, (err as Error).message, 500);
