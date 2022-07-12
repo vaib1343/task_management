@@ -1,3 +1,4 @@
+import { useAppDispatch } from 'appState/hooks';
 import Button from 'component/common/Button/Button';
 import Input from 'component/common/Input/Input';
 import Done from 'component/Done/Done';
@@ -6,6 +7,11 @@ import Todo from 'component/Todo/Todo';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
+    
+    const dispatch = useAppDispatch();
+    const handleCreateTask = () => {
+
+    }
     return (
         <div className='container mt-5'>
             <div className='row mb-4'>

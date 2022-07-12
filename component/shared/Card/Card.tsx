@@ -3,12 +3,14 @@ import Label from 'component/common/Label/Label';
 import React from 'react';
 import styles from './Card.module.scss';
 import { faFlag, faClock } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 
 interface CardProps {
     title: string;
     description: string;
     label: string;
     Priority: string;
+    time: string
 }
 
 const Card: React.FC<CardProps> = (props) => {
@@ -30,7 +32,7 @@ const Card: React.FC<CardProps> = (props) => {
                 </div>
                 <div className={styles.iconContainer}>
                     <Icon color={color} icon={faFlag} />
-                    <Icon icon={faClock} text='2 march' />
+                    <Icon icon={faClock} text={moment(props.time).format('Do MMM')} />
                 </div>
             </div>
         </>

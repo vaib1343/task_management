@@ -6,6 +6,7 @@ interface CardContainerProps {
     title: string;
     children?: React.ReactNode;
     style?: React.CSSProperties;
+    count: number;
 }
 
 const CardContainer: React.FC<CardContainerProps> = (props) => {
@@ -14,7 +15,7 @@ const CardContainer: React.FC<CardContainerProps> = (props) => {
             <div className={styles.cardContainer}>
                 <div className={`${styles.heading} d-flex align-items-center`}>
                     <h4>{props.title}</h4>
-                    <CircularButton label='3' />
+                    <CircularButton label={props.count} />
                 </div>
                 {props.children}
             </div>
