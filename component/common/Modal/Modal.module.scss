@@ -2,7 +2,7 @@
 
 .modal {
     width: 40%;
-    height: 50rem;
+    height: fit-content;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow-y: auto;
+    // overflow-y:visible;
 
     .closeIcon{
         color: $primary;

@@ -41,12 +41,14 @@ const Home: NextPage = () => {
                     <Done />
                 </div>
             </div>
-            <TaskForm
-                onRequestClose={() => {
+            <Modal
+                title='Create'
+                onClose={() => {
                     setIsModalOpen(false);
                 }}
-                isModelOpen={isModalOpen}
-            />
+                isOpen={isModalOpen}>
+                <TaskForm onRequestClose={() => setIsModalOpen(false)} action='create'/>
+            </Modal>
         </div>
     );
 };

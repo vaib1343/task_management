@@ -21,3 +21,9 @@ export const PriorityOptions = [
 ];
 
 export const requiredField = ['name', 'description', 'label', 'priority', 'dateCompletion'];
+
+export const StatusOptions = [
+    { key: 'Todo', value: 'TODO' },
+    { key: 'In Progress', value: 'INPROGRESS' },
+    { key: 'Done', value: 'DONE' },
+];

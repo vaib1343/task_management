@@ -12,11 +12,32 @@ export const fetchAllTask = createAsyncThunk<{ data: task[]; status: string }, s
     return { data, status };
 });
 
+export const fetchTask = createAsyncThunk<task, string>('task/get', async (id) => {
+    let baseURL = '/api/task';
+    const response = await axios.get(baseURL + '/' + id);
+    const data: task = response.data.data;
+    return data;
+});
+
 export const createTask = createAsyncThunk<task, {}>('task/create', async (data, thunkAPI) => {
     let baseURL = '/api/task';
     const response = await axios.post(baseURL, data);
     const responseData: task = response.data.data;
     return responseData;
+});
+
+export const updatetask = createAsyncThunk<task, { payload: Object; id: string | undefined }>('task/update', async ({ payload, id }) => {
+    let baseURL = '/api/task';
+    const response = await axios.put(baseURL + '/' + id, payload);
+    const data: task = response.data.data;
+    return data;
+});
+
+export const deleteTask = createAsyncThunk<task, string>('task/get', async (id) => {
+    let baseURL = '/api/task';
+    const response = await axios.delete(baseURL + '/' + id);
+    const data: task = response.data.data;
+    return data;
 });
 
 type taskState = {
@@ -26,6 +47,7 @@ type taskState = {
     inProgressList: task[];
     status: string;
     error: string;
+    taskDelete: boolean;
 };
 
 const initialState = {
@@ -35,6 +57,7 @@ const initialState = {
     inProgressList: [] as task[],
     status: '',
     error: '',
+    taskDelete: false,
 } as taskState;
 
 const task = createSlice({
@@ -63,6 +86,22 @@ const task = createSlice({
         });
 
         builder.addCase(fetchAllTask.rejected, (state, { payload }) => {
+            state.status = 'failed';
+            if (payload) state.error = payload as string;
+        });
+        builder.addCase(deleteTask.pending, (state, { payload }) => {
+            state.status = 'pending';
+            state.taskDelete = false;
+            state.error = '';
+        });
+
+        builder.addCase(deleteTask.fulfilled, (state, { payload }) => {
+            state.status = 'success';
+            state.error = '';
+            state.taskDelete = true;
+        });
+
+        builder.addCase(deleteTask.rejected, (state, { payload }) => {
             state.status = 'failed';
             if (payload) state.error = payload as string;
         });

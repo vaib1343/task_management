@@ -4,7 +4,7 @@ import styles from './Select.module.scss';
 interface SelectProps extends React.InputHTMLAttributes<HTMLSelectElement> {
     options: Array<{ key: string; value: string }>;
     label: string;
-    error: string;
+    error?: string;
 }
 
 const Select: React.FC<SelectProps> = (props) => {

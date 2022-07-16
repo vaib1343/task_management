@@ -9,10 +9,12 @@ const InProgress = () => {
     const { inProgressList } = useAppSelector((state) => state.task);
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const {taskDelete} = useAppSelector(state => state.task)
+
 
     useEffect(() => {
         dispatch(fetchAllTask('INPROGRESS'));
-    }, []);
+    }, [taskDelete]);
 
     useEffect(() => {
         if (router.query.model == 'close') {
@@ -25,7 +27,7 @@ const InProgress = () => {
                 {!!inProgressList.length &&
                     inProgressList.map((el, index) => (
                         <React.Fragment key={el.id}>
-                            <Card title={el.name} description={el.description} label={el.label} Priority={el.priority} time={el.dateCompletion} />
+                            <Card id={el.id} title={el.name} description={el.description} label={el.label} Priority={el.priority} time={el.dateCompletion} />
                         </React.Fragment>
                     ))}
             </CardContainer>

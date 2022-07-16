@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TaskForm.module.scss';
 import Button from 'component/common/Button/Button';
 import Input from 'component/common/Input/Input';
 import Modal from 'component/common/Modal/Modal';
 import Select from 'component/common/Select/Select';
 import TextArea from 'component/common/TextArea/TextArea';
-import { PriorityOptions, requiredField } from 'utils/utils';
+import { PriorityOptions, requiredField, StatusOptions } from 'utils/utils';
 import DatePicker from 'component/common/DatePicker/DatePicker';
 import { useAppDispatch } from 'appState/hooks';
-import { createTask } from 'appState/slice/task.slice';
+import { createTask, fetchTask, updatetask } from 'appState/slice/task.slice';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 interface TaskFormProps {
+    action?: string;
     onRequestClose: () => void;
-    isModelOpen: boolean;
+    id?: string;
 }
 
 interface Task {
@@ -23,6 +24,7 @@ interface Task {
     label: string;
     priority: string;
     dateCompletion: Date | null;
+    status?: string;
 }
 
 const TaskForm: React.FC<TaskFormProps> = (props) => {
@@ -32,6 +34,7 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
         label: '',
         priority: '',
         dateCompletion: new Date(),
+        status: 'TODO',
     });
     const [error, setError] = useState<Task>({} as Task);
     const dispatch = useAppDispatch();
@@ -56,7 +59,7 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
         let flag = false;
         const errorPost = { ...error };
         requiredField.map((el) => {
-            if (Object.keys(fields).includes(el) && !fields[el]) {
+            if (Object.keys(fields).includes(el) && !fields[el as keyof typeof fields]) {
                 errorPost[el] = `${el} is a require field`;
                 flag = true;
             } else {
@@ -67,6 +70,24 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
         return flag;
     };
 
+    useEffect(() => {
+        if (props.id) {
+            dispatch(fetchTask('' + props.id))
+                .unwrap()
+                .then((res) => {
+                    setTaskData((preState) => ({
+                        ...preState,
+                        name: res.name,
+                        description: res.description,
+                        label: res.label,
+                        priority: res.priority,
+                        dateCompletion: new Date(res.dateCompletion),
+                        status: res.status,
+                    }));
+                });
+        }
+    }, [props.id]);
+
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (checkRequiredField(taskData)) {
@@ -75,37 +96,56 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
         const postData = {
             ...taskData,
             dateCompletion: taskData.dateCompletion?.toISOString(),
-            status: 'TODO',
         };
-        dispatch(createTask(postData))
-            .unwrap()
-            .then((res) => {
-                router.push({
-                    query: {
-                        model: 'close',
-                    },
+        if (props.action == 'create') {
+            dispatch(createTask(postData))
+                .unwrap()
+                .then((res) => {
+                    router.push({
+                        query: {
+                            model: 'close',
+                        },
+                    });
+                    props.onRequestClose();
+                    if (Object.keys(res).length) {
+                        toast.success('Task created successfully');
+                    }
                 });
-                props.onRequestClose();
-                if (Object.keys(res).length) {
-                    toast.success('Task created successfully');
-                }
-            });
+        } else {
+            dispatch(updatetask({ payload: postData, id: props.id }))
+                .unwrap()
+                .then((res) => {
+                    router.push({
+                        query: {
+                            model: 'close',
+                        },
+                    });
+                    props.onRequestClose();
+                    if (Object.keys(res).length) {
+                        toast.success('Task updated successfully');
+                    }
+                });
+        }
     };
+    const { action } = props;
     return (
-        <div>
-            <Modal title='Create task' isOpen={props.isModelOpen} onClose={props.onRequestClose}>
-                <div className='mt-4'>
-                    <Input error={error.name} label='Name' type='text' name='name' placeholder='Enter task name' onChange={(e) => handleChange(e)} value={taskData.name} />
-                    <TextArea error={error.description} label='Description' name='description' placeholder='Enter description' onChange={(e) => handleChange(e)} value={taskData.description} />
-                    <Input error={error.label} label='Label' type='text' name='label' placeholder='Enter label' onChange={(e) => handleChange(e)} value={taskData.label} />
-                    <Select error={error.priority} label='Priority' name='priority' options={PriorityOptions} onChange={(e) => handleChange(e)} value={taskData.priority} />
-                    <DatePicker minDate={new Date()} selected={taskData.dateCompletion} onChange={(e) => handleDate(e)} label='Date of Completion' />
-                    <div className='mt-4'>
-                        <Button variant='filled' type='submit' label='Submit' style={{ marginRight: '1rem' }} onClick={(e) => handleSubmit(e)} />
-                        <Button variant='outline' label='Close' onClick={() => props.onRequestClose()} />
-                    </div>
-                </div>
-            </Modal>
+        <div className='mt-4'>
+            <Input error={error.name} label='Name' type='text' name='name' placeholder='Enter task name' onChange={(e) => handleChange(e)} value={taskData.name} />
+            <TextArea error={error.description} label='Description' name='description' placeholder='Enter description' onChange={(e) => handleChange(e)} value={taskData.description} />
+            <Input error={error.label} label='Label' type='text' name='label' placeholder='Enter label' onChange={(e) => handleChange(e)} value={taskData.label} />
+            <Select error={error.priority} label='Priority' name='priority' options={PriorityOptions} onChange={(e) => handleChange(e)} value={taskData.priority} />
+            <DatePicker minDate={new Date()} selected={taskData.dateCompletion} onChange={(e) => handleDate(e)} label='Date of Completion' />
+            {action == 'update' && <Select label='Status' name='status' options={StatusOptions} onChange={(e) => handleChange(e)} value={taskData.status}></Select>}
+            <div className='mt-4'>
+                <Button variant='filled' type='submit' label='Submit' style={{ marginRight: '1rem' }} onClick={(e) => handleSubmit(e)} />
+                <Button
+                    variant='outline'
+                    label='Close'
+                    onClick={() => {
+                        props.onRequestClose();
+                    }}
+                />
+            </div>
         </div>
     );
 };

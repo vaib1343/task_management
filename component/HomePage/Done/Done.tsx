@@ -8,11 +8,12 @@ import { useRouter } from 'next/router';
 const Done = () => {
     const { doneList } = useAppSelector((state) => state.task);
     const dispatch = useAppDispatch();
+    const {taskDelete} = useAppSelector(state => state.task)
     const router = useRouter();
     
     useEffect(() => {
         dispatch(fetchAllTask('DONE'));
-    }, []);
+    }, [taskDelete]);
 
     useEffect(() => {
         if (router.query.model == 'close') {
@@ -25,7 +26,7 @@ const Done = () => {
                 {!!doneList.length &&
                     doneList.map((el, index) => (
                         <React.Fragment key={el.id}>
-                            <Card title={el.name} description={el.description} label={el.label} Priority={el.priority} time={el.dateCompletion} />
+                            <Card id={el.id} title={el.name} description={el.description} label={el.label} Priority={el.priority} time={el.dateCompletion} />
                         </React.Fragment>
                     ))}
             </CardContainer>
