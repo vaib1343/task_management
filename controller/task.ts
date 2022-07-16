@@ -9,7 +9,7 @@ export const getAllTask = async (req: NextApiRequest, res: NextApiResponse) => {
         const status = req.query.status;
         let tasks;
         tasks = await prisma.task.findMany();
-        if (status === 'TODO' || status === 'PENDING' || status === 'DONE') {
+        if (status === 'TODO' || status === 'INPROGRESS' || status === 'DONE') {
             tasks = await prisma.task.findMany({
                 where: {
                     status: status,

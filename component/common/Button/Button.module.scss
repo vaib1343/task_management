@@ -1,11 +1,27 @@
 @import '../../../styles/variable';
 
-
 .btn {
-    color: white !important;
-    background-color: $primary;
     font-size: 1.5rem;
-    padding: .9rem 2rem;
-    border-radius: .5rem;
+    padding: 0.9rem 2rem;
+    border-radius: 0.5rem;
     // font-weight: 400;
+}
+
+.outline {
+    border: 1px solid $primary;
+    background-color: white;
+    color: $primary;
+    &:hover {
+        background-color: $primary;
+        color: white;
+    }
+}
+
+.filled {
+    background-color: $primary;
+    color: white !important;
+    transition: all 0.2s ease;
+    &:hover {
+        opacity: .8;
+    }
 }

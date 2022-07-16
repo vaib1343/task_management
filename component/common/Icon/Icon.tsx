@@ -14,8 +14,8 @@ const Icon: React.FC<FontAwesomeIconProps & IconProps> = (props) => {
     }
     return (
         <>
-            <span className='d-flex '>
-                <FontAwesomeIcon className={`${styles.icon} ${color}`} icon={props.icon} style={props.text ? { marginRight: '1rem' } : {}} /> <h5>{props.text}</h5>
+            <span className='d-flex'>
+                <FontAwesomeIcon {...props} className={`${styles.icon} ${color}`} icon={props.icon} style={props.text ? { marginRight: '1rem' } : {}} /> <h5 className={styles.text}>{props.text}</h5>
             </span>
         </>
     );

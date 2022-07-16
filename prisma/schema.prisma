@@ -28,7 +28,7 @@ model Task {
 
 enum Status {
     TODO
-    PENDING
+    INPROGRESS
     DONE
 }
 

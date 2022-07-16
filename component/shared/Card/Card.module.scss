@@ -1,12 +1,17 @@
 .cardContainer {
     width: 100%;
-    padding: 1.5rem;
     background-color: #fff;
     border-radius: 0.4rem;
     margin: 1rem 0;
 
-    .titleContainter {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    // .titleContainter {
+    //     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    // }
+
+    .border {
+        width: 100%;
+        height: 0.1rem;
+        background-color: rgba(0, 0, 0, 0.2);
     }
 
     h5 {
@@ -15,11 +20,17 @@
     p {
         font-size: 1.4rem;
     }
-    .label{
+    .label {
         margin-bottom: 1rem;
     }
 
-    .iconContainer{
+    .titleContainter{
+        padding: 1.5rem ;
+    }
+
+    .iconContainer {
+        padding: 1.5rem;
+        padding-top: 0;
         margin-top: 1.5rem;
         margin-left: 1rem;
         display: flex;

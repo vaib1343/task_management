@@ -3,12 +3,14 @@ import styles from './Button.module.scss';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     label: string;
+    variant: 'outline' | 'filled';
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
+    const { label, variant, ...remainingProps} = props;
     return (
         <>
-            <button className={`btn ${styles.btn}`}>{props.label}</button>
+            <button {...remainingProps} className={`btn ${styles.btn} ${styles[variant]}`}>{label}</button>
         </>
     );
 };

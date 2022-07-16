@@ -30,6 +30,7 @@ const Card: React.FC<CardProps> = (props) => {
                     <p>{props.description}</p>
                     <Label className={styles.label}>{props.label}</Label>
                 </div>
+                <div className={styles.border}></div>
                 <div className={styles.iconContainer}>
                     <Icon color={color} icon={faFlag} />
                     <Icon icon={faClock} text={moment(props.time).format('Do MMM')} />

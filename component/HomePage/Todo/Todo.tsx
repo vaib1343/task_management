@@ -3,13 +3,21 @@ import Card from 'component/shared/Card/Card';
 import CardContainer from 'component/shared/CardContainer/CardContainer';
 import { useAppDispatch, useAppSelector } from 'appState/hooks';
 import { fetchAllTask } from 'appState/slice/task.slice';
+import { useRouter } from 'next/router';
 const Todo = () => {
     const { todoList } = useAppSelector((state) => state.task);
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     useEffect(() => {
         dispatch(fetchAllTask('TODO'));
     }, []);
+
+    useEffect(() => {
+        if (router.query.model == 'close') {
+            dispatch(fetchAllTask('TODO'));
+        }
+    }, [router.query.model]);
 
     return (
         <>
