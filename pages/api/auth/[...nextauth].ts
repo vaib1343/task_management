@@ -14,23 +14,27 @@ export default NextAuth({
     providers: [
         // EmailProviders({
         //     server: {
-        //         host: 'smtp-relay.sendinblue.com',
+        //         host: 'smtp.netcorecloud.netm',
         //         port: 587,
         //         auth: {
         //             user: 'vaib1343@gmail.com',
-        //             pass: '1tdqrLY0hnIgOAPU',
+        //             pass: 'Vaib#1343',
         //         },
         //     },
         //     from: 'vaib1343@gmail.com',
         // }),
+        // GithubProviders({
+        //     clientId: '536ea8681e78860cba5b',
+        //     clientSecret: 'f75714230ca6034c866ebeef68caff419707d658',
+        // }),
         GithubProviders({
-            clientId: '536ea8681e78860cba5b',
-            clientSecret: 'f75714230ca6034c866ebeef68caff419707d658',
+            clientId: process.env.GITHUB_ID,
+            clientSecret: process.env.GITHUB_SECRET,
         }),
-        TwitterProviders({
-            clientId: 'h6BnBeSn0HV1SKutp6djW4JF0',
-            clientSecret: 'OB6RKK7hMFAMJ6M38VANEdYXfg0RO6Cza1SFo56kyG6uUQ1u7b',
-        }),
+        // TwitterProviders({
+        //     clientId: 'RGpUaXp3M0pFMGg4Qk11SE9XMUQ6MTpjaQ',
+        //     clientSecret: 'mJRSheQH9VOfDyKtap_xE2-jzl6kAFhag2YCkZ_-s61nnzodOE',
+        // }),
     ],
     pages: {
         signIn: '/auth/signin',

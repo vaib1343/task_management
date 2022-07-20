@@ -23,14 +23,15 @@ const SignInForm = () => {
 
     return (
         <div className={styles.cardContainer}>
+            <h1 className='text-center'>Task Manager</h1>
             <div className='d-flex flex-column mb-5'>
-                <Input placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} value={email} />
-                <Button variant='outline' label='SignIn' className='mt-3' onClick={handleSubmit} />
+                {/* <Input placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} value={email} />
+                <Button variant='outline' label='SignIn' className='mt-3' onClick={handleSubmit} /> */}
             </div>
             <div className='w-100 d-flex flex-column'>
                 <Button variant='filled' onClick={() => handleSignIn('github')} label='SignIn with github' className='mb-2' />
-                <Button variant='filled' onClick={() => handleSignIn('github')} label='SignIn with Google' className='mb-2' />
-                <Button variant='filled' onClick={() => handleSignIn('twitter')} label='SignIn with Twitter' className='mb-2' />
+                {/* <Button variant='filled' onClick={() => handleSignIn('github')} label='SignIn with Google' className='mb-2' /> */}
+                {/* <Button variant='filled' onClick={() => handleSignIn('twitter')} label='SignIn with Twitter' className='mb-2' /> */}
             </div>
         </div>
     );
