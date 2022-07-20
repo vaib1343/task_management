@@ -3,7 +3,8 @@ import React from 'react';
 import SignIn from 'component/SignInPage';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-const signin: NextPage = () => {
+
+const Signin: NextPage = () => {
     const {data: session} = useSession();
     const router = useRouter();
 
@@ -18,4 +19,4 @@ const signin: NextPage = () => {
     );
 };
 
-export default signin;
+export default Signin;
