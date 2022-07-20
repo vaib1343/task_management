@@ -13,6 +13,7 @@ export const getAllTask = async (req: NextApiRequest, res: NextApiResponse) => {
             tasks = await prisma.task.findMany({
                 where: {
                     status: status,
+                    userId: req.user.id,
                 },
             });
         }
@@ -47,6 +48,7 @@ export const createTask = async (req: NextApiRequest, res: NextApiResponse, next
             data: {
                 ...taskData,
                 status: 'TODO',
+                userId: req.user.id,
             },
         });
 
