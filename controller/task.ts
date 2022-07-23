@@ -4,7 +4,13 @@ import ErrorHandler from 'utils/errorHandler';
 import { success, error } from 'utils/responseHandler';
 import { undefineHandle } from 'utils/utils';
 
-export const getAllTask = async (req: NextApiRequest, res: NextApiResponse) => {
+interface NextRequestUser extends NextApiRequest{
+    user: {
+        id: string
+    }
+}
+
+export const getAllTask = async (req: NextRequestUser, res: NextApiResponse) => {
     try {
         const status = req.query.status;
         let tasks;
@@ -37,7 +43,7 @@ export const getTask = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-export const createTask = async (req: NextApiRequest, res: NextApiResponse, next: (error: ErrorHandler) => void) => {
+export const createTask = async (req: NextRequestUser, res: NextApiResponse, next: (error: ErrorHandler) => void) => {
     try {
         const taskData = req.body;
         if (undefineHandle(taskData)) {

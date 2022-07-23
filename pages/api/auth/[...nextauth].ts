@@ -8,7 +8,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-
 export default NextAuth({
     adapter: PrismaAdapter(prisma),
     providers: [
@@ -28,8 +27,8 @@ export default NextAuth({
         //     clientSecret: 'f75714230ca6034c866ebeef68caff419707d658',
         // }),
         GithubProviders({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET,
+            clientId: String(process.env.GITHUB_ID),
+            clientSecret: String(process.env.GITHUB_SECRET),
         }),
         // TwitterProviders({
         //     clientId: 'RGpUaXp3M0pFMGg4Qk11SE9XMUQ6MTpjaQ',
@@ -41,8 +40,10 @@ export default NextAuth({
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        session: (params) => {
-            return Promise.resolve(params);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        session: async (params) => {
+            return params;
         },
     },
 });

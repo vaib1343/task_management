@@ -36,7 +36,14 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
         dateCompletion: new Date(),
         status: 'TODO',
     });
-    const [error, setError] = useState<Task>({} as Task);
+    const [error, setError] = useState({
+        name: '',
+        description: '',
+        label: '',
+        priority: '',
+        dateCompletion: '',
+        status: '',
+    });
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -60,10 +67,10 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
         const errorPost = { ...error };
         requiredField.map((el) => {
             if (Object.keys(fields).includes(el) && !fields[el as keyof typeof fields]) {
-                errorPost[el] = `${el} is a require field`;
+                errorPost[el as keyof typeof error] = `${el} is a require field`;
                 flag = true;
             } else {
-                errorPost[el] = '';
+                errorPost[el as keyof typeof error] = '';
             }
         });
         setError(errorPost);
