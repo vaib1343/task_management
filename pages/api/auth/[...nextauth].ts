@@ -40,7 +40,6 @@ export default NextAuth({
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         session: async (params) => {
             return params;
