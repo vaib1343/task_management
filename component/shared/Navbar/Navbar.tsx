@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import styles from './Navbar.module.scss';
 import { signOut, useSession } from 'next-auth/react';
-const Navbar = () => {
+import { BsFillMoonFill } from 'react-icons/bs';
+import { MdWbSunny } from 'react-icons/md';
+
+interface NavbarProps {
+    setTheme: (e:any) => void
+}
+
+const Navbar = ({setTheme}:NavbarProps) => {
     const [dropdown, setdropdown] = useState(false);
     const { data: session } = useSession();
     return (
         <>
             <div className={styles.container}>
                 <h5 className={styles.heading}>Task Manager</h5>
+                <div>
+                    <div>
+                        <label className={styles.switch} htmlFor='switch'>
+                            <input type="checkbox" id='switch' onChange={(e) => setTheme(e)}/>
+                            <span className={styles.slider}></span>
+                            <MdWbSunny className={styles.day}/>
+                            <BsFillMoonFill className={styles.night}/>
+                        </label>
+                    </div>
+                </div>
                 {session && (
                     <div className={`navbar-nav ${styles.dropdown}`}>
                         <a className='nav-link' href='#' role='button' onClick={() => setdropdown(!dropdown)}>
