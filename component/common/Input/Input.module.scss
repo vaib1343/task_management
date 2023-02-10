@@ -1,7 +1,19 @@
 .input {
     font-size: 1.5rem;
+    padding: 0.8rem 1rem;
+    border: 0px;
+    outline: 0px;
+    border-bottom: 1px solid #8c8c8c;
+    opacity: 0.8;
+    background-color: inherit;
+    color: inherit;
+    &:focus {
+        background-color: inherit;
+        color: inherit;
+    }
 }
 
-.label{
+.label {
     font-size: 1.5rem;
+    margin-bottom: 0.2rem;
 }

@@ -5,6 +5,7 @@ import styles from './SignInForm.module.scss';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { AiFillGithub, AiFillGoogleCircle, AiFillTwitterCircle } from 'react-icons/ai';
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');
@@ -23,15 +24,17 @@ const SignInForm = () => {
 
     return (
         <div className={styles.cardContainer}>
-            <h1 className='text-center'>Task Manager</h1>
-            <div className='d-flex flex-column mb-5'>
-                {/* <Input placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} value={email} />
-                <Button variant='outline' label='SignIn' className='mt-3' onClick={handleSubmit} /> */}
+            <h1 className='text-center'>Sign In</h1>
+            <div className='d-flex flex-column mb-2'>
+                <Input label='Email' placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} value={email} />
+                <Input label='Password' placeholder='Enter Password' onChange={(e) => setEmail(e.target.value)} value={email} />
+                <Button variant='filled' label='SignIn' className='mt-5' onClick={handleSubmit} />
             </div>
-            <div className='w-100 d-flex flex-column'>
-                <Button variant='filled' onClick={() => handleSignIn('github')} label='SignIn with github' className='mb-2' />
-                {/* <Button variant='filled' onClick={() => handleSignIn('github')} label='SignIn with Google' className='mb-2' /> */}
-                {/* <Button variant='filled' onClick={() => handleSignIn('twitter')} label='SignIn with Twitter' className='mb-2' /> */}
+            <a className={styles.signupLink}>Dont have an account?</a>
+            <div className='w-75 m-auto d-flex justify-content-between align-item-center mt-5'>
+                <Button  variant='filled' onClick={() => handleSignIn('github')} label={<AiFillGithub />} className={styles.icon} />
+                <Button variant='filled' onClick={() => handleSignIn('google')} label={<AiFillGoogleCircle />} className={styles.icon} />
+                <Button variant='filled' onClick={() => handleSignIn('twitter')} label={<AiFillTwitterCircle />} className={styles.icon} />
             </div>
         </div>
     );

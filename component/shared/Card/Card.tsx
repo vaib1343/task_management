@@ -2,7 +2,7 @@ import Icon from 'component/common/Icon/Icon';
 import Label from 'component/common/Label/Label';
 import React, { useState } from 'react';
 import styles from './Card.module.scss';
-import { faFlag, faClock, faEdit, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+// import { faFlag, faClock, faEdit, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import TaskForm from 'component/HomePage/TaskForm/TaskForm';
 import { useRouter } from 'next/router';
@@ -65,14 +65,14 @@ const Card: React.FC<CardProps> = (props) => {
                         <Label className={styles.label}>{props.label}</Label>
                     </div>
                     <div className={`${styles.editIcon} d-flex`}>
-                        <Icon color='grey' icon={faEdit} onClick={() => handleEdit()} />
-                        <Icon color='red' icon={faTrashCan} onClick={() => handleDelete()} />
+                        {/* <Icon color='grey' icon={faEdit} onClick={() => handleEdit()} /> */}
+                        {/* <Icon color='red' icon={faTrashCan} onClick={() => handleDelete()} /> */}
                     </div>
                 </div>
                 <div className={styles.border}></div>
                 <div className={styles.iconContainer}>
-                    <Icon color={color} icon={faFlag} />
-                    <Icon icon={faClock} text={moment(props.time).format('Do MMM')} />
+                    {/* <Icon color={color} icon={faFlag} /> */}
+                    {/* <Icon icon={faClock} text={moment(props.time).format('Do MMM')} /> */}
                 </div>
             </div>
             <Modal

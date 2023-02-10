@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import Icon from '../Icon/Icon';
 import styles from './Modal.module.scss';
-import { faCross, faClose } from '@fortawesome/free-solid-svg-icons';
+// import { faCross, faClose } from '@fortawesome/free-solid-svg-icons';
 
 ReactModal.setAppElement('#root');
 
@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                 <div className={`d-flex justify-content-between align-items-center ${styles.header}`}>
                     <h3>{props.title}</h3>
                     <div onClick={handleModal} style={{ cursor: 'pointer' }}>
-                        <Icon icon={faClose} className={styles.closeIcon} />
+                        {/* <Icon icon={faClose} className={styles.closeIcon} /> */}
                     </div>
                 </div>
                 <div className={styles.body}>

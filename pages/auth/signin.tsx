@@ -13,8 +13,8 @@ const Signin: NextPage = () => {
         return <></>
     }
     return (
-        <div>
-            <SignIn />
+        <div className='w-100 mt-5'>
+            <SignIn/>
         </div>
     );
 };
